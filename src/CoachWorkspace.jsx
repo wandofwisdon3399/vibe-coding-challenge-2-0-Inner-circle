@@ -4,6 +4,12 @@ import "./CoachWorkspace.css";
 import AttendancePage from "./AttendancePage.jsx";
 import MatchesPage from "./MatchesPage.jsx";
 import TrialReadinessPage from "./TrialReadinessPage.jsx";
+import {
+  useDrawer,
+  usePageHistory,
+  useScrollToTop,
+  pageFromHash,
+} from "./useMobileNav.js";
 
 const BASE = "/api";
 
@@ -33,6 +39,8 @@ const NAV = [
   { id: "attendance", label: "Attendance", icon: "☑" },
   { id: "trials", label: "Trial Readiness", icon: "◎" },
 ];
+
+const COACH_PAGES = NAV.map((item) => item.id);
 
 const fullName = (p) => `${p.firstName || ""} ${p.lastName || ""}`.trim();
 const initials = (p) =>
@@ -222,7 +230,10 @@ function PlayerDetail({ player, onBack, onUpdated }) {
 export default function CoachWorkspace({ user, onLogout }) {
   const sports = useMemo(() => user.assignedSports || [], [user.assignedSports]);
 
-  const [page, setPage] = useState("overview");
+  const [page, setPage] = useState(() =>
+    pageFromHash(COACH_PAGES, "overview")
+  );
+  const drawer = useDrawer();
   const [players, setPlayers] = useState([]);
   const [matches, setMatches] = useState([]);
   const [today, setToday] = useState(null);
@@ -306,6 +317,15 @@ export default function CoachWorkspace({ user, onLogout }) {
     setPage(id);
     setSelected(null);
   }
+
+  // Back/Forward buttons move between pages; every new page starts at the top
+  usePageHistory({
+    page,
+    validPages: COACH_PAGES,
+    onPageChange: navigate,
+  });
+
+  useScrollToTop(`${page}:${selected?._id || ""}`);
 
   const sessionLabel = !today
     ? "—"
@@ -556,7 +576,24 @@ export default function CoachWorkspace({ user, onLogout }) {
 
   return (
     <div className="app-shell">
-      <aside className="sidebar">
+      <div
+        className={`sidebar-backdrop ${drawer.open ? "show" : ""}`}
+        onClick={drawer.close}
+      />
+
+      <aside
+        id="app-sidebar"
+        className={`sidebar ${drawer.open ? "open" : ""}`}
+      >
+        <button
+          type="button"
+          className="drawer-close"
+          aria-label="Close menu"
+          onClick={drawer.close}
+        >
+          ×
+        </button>
+
         <div className="brand">
           <div className="brand-icon">S</div>
 
@@ -574,7 +611,10 @@ export default function CoachWorkspace({ user, onLogout }) {
               key={item.id}
               type="button"
               className={`nav-item ${page === item.id ? "active" : ""}`}
-              onClick={() => navigate(item.id)}
+              onClick={() => {
+                navigate(item.id);
+                drawer.close();
+              }}
             >
               <span>{item.icon}</span>
               <b>{item.label}</b>
@@ -597,11 +637,31 @@ export default function CoachWorkspace({ user, onLogout }) {
               <span>COACH</span>
             </div>
           </div>
+
+          <button
+            type="button"
+            className="drawer-logout"
+            onClick={onLogout}
+          >
+            Logout
+          </button>
         </div>
       </aside>
 
       <main className="main-content">
         <header className="topbar">
+          <button
+            type="button"
+            className="menu-button"
+            aria-label="Open menu"
+            aria-expanded={drawer.open}
+            aria-controls="app-sidebar"
+            onClick={drawer.toggle}
+          >
+            <span />
+            <span />
+            <span />
+          </button>
           <div className="breadcrumb">
             <span>Workspace</span>
             <i>/</i>

@@ -1,6 +1,12 @@
 import { useEffect, useMemo, useState } from "react";
 import "./PlayerWorkspace.css";
 import quoteImage from "./assets/player-quote.jpg";
+import {
+  useDrawer,
+  usePageHistory,
+  useScrollToTop,
+  pageFromHash,
+} from "./useMobileNav.js";
 
 const BASE = "/api";
 
@@ -57,8 +63,20 @@ const TABS = [
   { id: "matches", label: "Matches" },
 ];
 
+const PLAYER_TABS = TABS.map((item) => item.id);
+
 export default function PlayerWorkspace({ user, onLogout }) {
-  const [tab, setTab] = useState("overview");
+  const [tab, setTab] = useState(() => pageFromHash(PLAYER_TABS, "overview"));
+  const drawer = useDrawer();
+
+  // Back/Forward buttons move between tabs; every tab starts at the top
+  usePageHistory({
+    page: tab,
+    validPages: PLAYER_TABS,
+    onPageChange: setTab,
+  });
+
+  useScrollToTop(tab);
   const [player, setPlayer] = useState(null);
   const [attendance, setAttendance] = useState(null);
   const [matches, setMatches] = useState([]);
@@ -130,7 +148,70 @@ export default function PlayerWorkspace({ user, onLogout }) {
 
   return (
     <div className="pw-page">
+      <div
+        className={`pd-backdrop ${drawer.open ? "show" : ""}`}
+        onClick={drawer.close}
+      />
+
+      <aside
+        id="player-drawer"
+        className={`pd-drawer ${drawer.open ? "open" : ""}`}
+        aria-label="Menu"
+      >
+        <div className="pd-head">
+          <div>
+            <strong>SPORTSYNC</strong>
+            <span>PLAYER PORTAL</span>
+          </div>
+
+          <button
+            type="button"
+            className="pd-close"
+            aria-label="Close menu"
+            onClick={drawer.close}
+          >
+            ×
+          </button>
+        </div>
+
+        <nav className="pd-nav">
+          {TABS.map((item) => (
+            <button
+              key={item.id}
+              type="button"
+              className={tab === item.id ? "active" : ""}
+              onClick={() => {
+                setTab(item.id);
+                drawer.close();
+              }}
+            >
+              {item.label}
+            </button>
+          ))}
+        </nav>
+
+        <div className="pd-foot">
+          <span>{user.username?.toUpperCase()}</span>
+          <button type="button" onClick={onLogout}>
+            Logout
+          </button>
+        </div>
+      </aside>
+
       <header className="pw-header">
+        <button
+          type="button"
+          className="pw-menu-button"
+          aria-label="Open menu"
+          aria-expanded={drawer.open}
+          aria-controls="player-drawer"
+          onClick={drawer.toggle}
+        >
+          <span />
+          <span />
+          <span />
+        </button>
+
         <div className="pw-brand">
           <div className="pw-brand-icon">S</div>
           <div>

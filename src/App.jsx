@@ -12,6 +12,12 @@ import ScoutWorkspace from "./ScoutWorkspace.jsx";
 import PlayerWorkspace from "./PlayerWorkspace.jsx";
 import CoachWorkspace from "./CoachWorkspace.jsx";
 import TrialReadinessPage from "./TrialReadinessPage.jsx";
+import {
+  useDrawer,
+  usePageHistory,
+  useScrollToTop,
+  pageFromHash,
+} from "./useMobileNav.js";
 import LoginCredentialsPanel from "./LoginCredentialsPanel.jsx";
 import PlayerAccountPanel from "./PlayerAccountPanel.jsx";
 import {
@@ -46,6 +52,8 @@ const NAV = [
   { id: "matches", label: "Matches", icon: "⚑" },
   { id: "trials", label: "Trial Readiness", icon: "◎" },
 ];
+
+const ADMIN_PAGES = NAV.map((item) => item.id);
 
 const blankForm = {
   firstName: "",
@@ -103,7 +111,10 @@ function PageHeading({ eyebrow, title, description, action }) {
 }
 
 function App() {
-  const [activePage, setActivePage] = useState("dashboard");
+  const [activePage, setActivePage] = useState(() =>
+    pageFromHash(ADMIN_PAGES, "dashboard")
+  );
+  const drawer = useDrawer();
 
   // Authentication
   const [currentUser, setCurrentUser] = useState(null);
@@ -296,6 +307,16 @@ function App() {
       fetchAttSummary();
     }
   }, [activePage, currentUser]);
+
+  // Back/Forward buttons move between pages; every new page starts at the top
+  usePageHistory({
+    page: activePage,
+    validPages: ADMIN_PAGES,
+    onPageChange: navigate,
+    enabled: currentUser?.role === "admin",
+  });
+
+  useScrollToTop(`${activePage}:${selectedPlayer?._id || ""}`);
 
   function navigate(page) {
     setMatchIntent(null);
@@ -1632,7 +1653,24 @@ function App() {
   // Main Admin application
   return (
     <div className="app-shell">
-      <aside className="sidebar">
+      <div
+        className={`sidebar-backdrop ${drawer.open ? "show" : ""}`}
+        onClick={drawer.close}
+      />
+
+      <aside
+        id="app-sidebar"
+        className={`sidebar ${drawer.open ? "open" : ""}`}
+      >
+        <button
+          type="button"
+          className="drawer-close"
+          aria-label="Close menu"
+          onClick={drawer.close}
+        >
+          ×
+        </button>
+
         <div className="brand">
           <div className="brand-icon">S</div>
 
@@ -1652,7 +1690,10 @@ function App() {
               className={`nav-item ${
                 activePage === item.id ? "active" : ""
               }`}
-              onClick={() => navigate(item.id)}
+              onClick={() => {
+                navigate(item.id);
+                drawer.close();
+              }}
             >
               <span>{item.icon}</span>
               <b>{item.label}</b>
@@ -1689,11 +1730,31 @@ function App() {
               <span>{currentUser.role.toUpperCase()}</span>
             </div>
           </div>
+
+          <button
+            type="button"
+            className="drawer-logout"
+            onClick={handleLogout}
+          >
+            Logout
+          </button>
         </div>
       </aside>
 
       <main className="main-content">
         <header className="topbar">
+          <button
+            type="button"
+            className="menu-button"
+            aria-label="Open menu"
+            aria-expanded={drawer.open}
+            aria-controls="app-sidebar"
+            onClick={drawer.toggle}
+          >
+            <span />
+            <span />
+            <span />
+          </button>
           <div className="breadcrumb">
             <span>Workspace</span>
             <i>/</i>

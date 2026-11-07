@@ -1,0 +1,454 @@
+/* MOBILE NAVIGATION
+   Phones and small tablets get a slide-out menu (opened from the ☰ button)
+   instead of a permanent sidebar, so each page uses the full screen.
+   Loaded after every other stylesheet so it can override the older
+   small-screen rules. */
+
+/* Mobile-only controls stay hidden on desktop */
+.menu-button,
+.drawer-close,
+.drawer-logout,
+.sidebar-backdrop,
+.pd-drawer,
+.pd-backdrop,
+.pw-menu-button {
+  display: none;
+}
+
+@media (max-width: 860px) {
+  body.drawer-open {
+    overflow: hidden;
+  }
+
+  .app-shell {
+    display: block !important;
+    overflow-x: clip;
+  }
+
+  /* ---------- Slide-out menu ---------- */
+
+  .sidebar {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    z-index: 70 !important;
+    width: min(84vw, 300px) !important;
+    height: 100vh !important;
+    height: 100dvh !important;
+    min-height: 0 !important;
+    padding: 22px 16px 20px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 0 !important;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    transform: translateX(-104%);
+    visibility: hidden;
+    transition: transform 0.26s ease, visibility 0s linear 0.26s;
+  }
+
+  .sidebar.open {
+    transform: none;
+    visibility: visible;
+    box-shadow: 14px 0 44px rgba(0, 0, 0, 0.6);
+    transition: transform 0.26s ease, visibility 0s;
+  }
+
+  .sidebar-backdrop {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: 60;
+    background: rgba(0, 0, 0, 0.62);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.26s ease;
+  }
+
+  .sidebar-backdrop.show {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .drawer-close {
+    display: grid;
+    place-items: center;
+    position: absolute;
+    top: 16px;
+    right: 14px;
+    width: 38px;
+    height: 38px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    background: #1c191d;
+    color: #f5f2f2;
+    font-size: 22px;
+    line-height: 1;
+    cursor: pointer;
+  }
+
+  /* Undo the old icon-only / horizontal-strip layouts */
+  .brand {
+    width: auto !important;
+    justify-content: flex-start !important;
+    gap: 12px !important;
+    padding: 0 48px 0 4px !important;
+    margin-bottom: 26px !important;
+  }
+
+  .brand-icon {
+    display: grid !important;
+    width: 42px !important;
+    height: 42px !important;
+  }
+
+  .brand > div:last-child {
+    display: block !important;
+    font-size: inherit !important;
+  }
+
+  .brand-copy h2 {
+    font-size: 17px !important;
+    letter-spacing: 1.8px !important;
+  }
+
+  .brand-copy span {
+    font-size: 9px !important;
+    letter-spacing: 2px !important;
+  }
+
+  .menu-label {
+    display: block !important;
+    font-size: 10px !important;
+  }
+
+  .navigation {
+    display: flex !important;
+    flex-direction: column !important;
+    overflow: visible !important;
+    gap: 6px !important;
+    padding: 0 !important;
+  }
+
+  .nav-item {
+    width: 100% !important;
+    min-width: 0 !important;
+    min-height: 50px !important;
+    flex: none !important;
+    justify-content: flex-start !important;
+    gap: 13px !important;
+    padding: 0 14px !important;
+    font-size: 14px !important;
+    white-space: normal;
+  }
+
+  .nav-item b {
+    display: inline !important;
+    font-size: 14px !important;
+    font-weight: 600;
+  }
+
+  .nav-item > span:first-child {
+    font-size: 18px !important;
+  }
+
+  .nav-item .nav-count,
+  .nav-item:not(.active) .nav-count {
+    display: inline-block !important;
+    font-size: 10px !important;
+  }
+
+  .sidebar-bottom {
+    display: block !important;
+    margin-top: auto !important;
+    padding-top: 22px;
+  }
+
+  .help-card {
+    display: none !important;
+  }
+
+  .profile {
+    justify-content: flex-start !important;
+  }
+
+  .profile-info {
+    display: flex !important;
+  }
+
+  .profile-menu {
+    display: none !important;
+  }
+
+  .drawer-logout {
+    display: block;
+    width: 100%;
+    margin-top: 16px;
+    padding: 13px 14px;
+    border: 1px solid rgba(213, 43, 66, 0.4);
+    border-radius: 10px;
+    background: rgba(213, 43, 66, 0.12);
+    color: #ff8fa0;
+    font: inherit;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+  }
+
+  /* ---------- Page area ---------- */
+
+  .main-content {
+    margin: 0 !important;
+    width: 100% !important;
+    min-width: 0;
+  }
+
+  .topbar {
+    position: sticky !important;
+    top: 0;
+    z-index: 40;
+    height: 58px !important;
+    min-height: 58px !important;
+    padding: 0 14px !important;
+    gap: 12px !important;
+    justify-content: flex-start !important;
+    background: #0e0c0f !important;
+  }
+
+  .menu-button {
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    flex: none;
+    width: 40px;
+    height: 40px;
+    padding: 0 10px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    background: #1c191d;
+    cursor: pointer;
+  }
+
+  .menu-button span {
+    display: block;
+    height: 2px;
+    border-radius: 2px;
+    background: #f5f2f2;
+  }
+
+  .breadcrumb {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    font-size: 15px !important;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .breadcrumb > span,
+  .breadcrumb > i {
+    display: none;
+  }
+
+  .topbar-actions {
+    flex: none;
+    margin-left: auto;
+    gap: 10px !important;
+  }
+
+  .topbar-actions .today-label,
+  .topbar-actions .icon-button,
+  .topbar-actions .secondary-button {
+    display: none !important;
+  }
+
+  .page-content {
+    padding: 18px 14px 28px !important;
+  }
+
+  /* ---------- Player portal ---------- */
+
+  .pw-header {
+    position: sticky;
+    top: 0;
+    z-index: 40;
+    padding: 10px 14px;
+  }
+
+  .pw-menu-button {
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    flex: none;
+    width: 40px;
+    height: 40px;
+    padding: 0 10px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    background: #1c191d;
+    cursor: pointer;
+  }
+
+  .pw-menu-button span {
+    display: block;
+    height: 2px;
+    border-radius: 2px;
+    background: #f5f2f2;
+  }
+
+  .pw-header .pw-brand {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .pw-header .pw-user {
+    display: none;
+  }
+
+  .pw-tabs {
+    display: none !important;
+  }
+
+  .pw-main {
+    padding: 18px 14px 32px !important;
+  }
+
+  .pd-backdrop {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: 60;
+    background: rgba(0, 0, 0, 0.62);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.26s ease;
+  }
+
+  .pd-backdrop.show {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .pd-drawer {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 70;
+    width: min(84vw, 300px);
+    height: 100vh;
+    height: 100dvh;
+    padding: 22px 16px 20px;
+    overflow-y: auto;
+    background: #111013;
+    border-right: 1px solid rgba(255, 255, 255, 0.075);
+    color: #f5f2f2;
+    transform: translateX(-104%);
+    visibility: hidden;
+    transition: transform 0.26s ease, visibility 0s linear 0.26s;
+  }
+
+  .pd-drawer.open {
+    transform: none;
+    visibility: visible;
+    box-shadow: 14px 0 44px rgba(0, 0, 0, 0.6);
+    transition: transform 0.26s ease, visibility 0s;
+  }
+
+  .pd-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 26px;
+  }
+
+  .pd-head strong {
+    display: block;
+    font-size: 17px;
+    letter-spacing: 1.8px;
+  }
+
+  .pd-head span {
+    display: block;
+    margin-top: 3px;
+    color: #91868d;
+    font-size: 9px;
+    letter-spacing: 2px;
+  }
+
+  .pd-close {
+    width: 38px;
+    height: 38px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    background: #1c191d;
+    color: #f5f2f2;
+    font-size: 22px;
+    line-height: 1;
+    cursor: pointer;
+  }
+
+  .pd-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .pd-nav button {
+    min-height: 50px;
+    padding: 0 14px;
+    border: 1px solid transparent;
+    border-radius: 9px;
+    background: transparent;
+    color: #aaa3aa;
+    font: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    text-align: left;
+    cursor: pointer;
+  }
+
+  .pd-nav button.active {
+    color: #fff;
+    background: linear-gradient(90deg, rgba(213, 43, 66, 0.19), rgba(213, 43, 66, 0.055));
+    border-color: rgba(213, 43, 66, 0.17);
+    box-shadow: inset 3px 0 0 #d52b42;
+  }
+
+  .pd-foot {
+    margin-top: auto;
+    padding-top: 22px;
+  }
+
+  .pd-foot > span {
+    display: block;
+    margin-bottom: 14px;
+    color: #918a91;
+    font-size: 12px;
+  }
+
+  .pd-foot button {
+    width: 100%;
+    padding: 13px 14px;
+    border: 1px solid rgba(213, 43, 66, 0.4);
+    border-radius: 10px;
+    background: rgba(213, 43, 66, 0.12);
+    color: #ff8fa0;
+    font: inherit;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sidebar,
+  .sidebar-backdrop,
+  .pd-drawer,
+  .pd-backdrop {
+    transition: none !important;
+  }
+}
