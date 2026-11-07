@@ -1,0 +1,445 @@
+/* LOGIN PAGE: split layout using the app's dark theme and crimson accent */
+
+.lp-page {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+  background: #0d0a0d;
+  color: #f5f2f2;
+  font-family: "DM Sans", "Inter", "Segoe UI", sans-serif;
+}
+
+/* Left: photograph */
+
+.lp-visual {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+  background: #0b090b;
+}
+
+.lp-photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* keeps the quote and the player in frame */
+  object-position: center 85%;
+  filter: contrast(1.05) brightness(0.92);
+}
+
+.lp-shade {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 18% 105%, rgba(213, 43, 66, 0.38), transparent 46%),
+    linear-gradient(to top, rgba(13, 10, 13, 0.92) 0%, rgba(13, 10, 13, 0) 30%),
+    linear-gradient(to right, rgba(13, 10, 13, 0) 70%, rgba(13, 10, 13, 0.55) 100%);
+  pointer-events: none;
+}
+
+.lp-visual-footer {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 22px 36px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.lp-logo {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+}
+
+.lp-logo-mark {
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border-radius: 9px;
+  background: #d52b42;
+  color: #fff;
+  font-family: "Manrope", sans-serif;
+  font-size: 19px;
+  font-weight: 800;
+}
+
+.lp-logo strong {
+  font-family: "Manrope", sans-serif;
+  font-size: 21px;
+  letter-spacing: -0.3px;
+}
+
+.lp-copy {
+  color: #b7afb7;
+  font-size: 12px;
+}
+
+/* Right: form */
+
+.lp-form-side {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: #121013;
+}
+
+.lp-top {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 26px 8% 0;
+  font-size: 12px;
+}
+
+.lp-top strong {
+  font-size: 13px;
+}
+
+.lp-top span {
+  color: #918a91;
+}
+
+.lp-form-wrap {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  max-width: 640px;
+  padding: 40px 8%;
+  box-sizing: border-box;
+}
+
+.lp-form-wrap h1 {
+  margin: 0 0 34px;
+  font-family: "Manrope", sans-serif;
+  font-size: clamp(34px, 3.6vw, 52px);
+  font-weight: 500;
+  line-height: 1.08;
+  letter-spacing: -1.6px;
+}
+
+.lp-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.lp-form label {
+  margin: 0 0 7px 16px;
+  color: #b7afb7;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.lp-form input {
+  box-sizing: border-box;
+  width: 100%;
+  height: 52px;
+  margin-bottom: 20px;
+  padding: 0 22px;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  outline: none;
+  background: #1f1b20;
+  color: #f5f2f2;
+  font: inherit;
+  font-size: 14px;
+  transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+}
+
+.lp-form input::placeholder {
+  color: #6f6870;
+}
+
+.lp-form input:focus {
+  border-color: #d52b42;
+  background: #231e24;
+  box-shadow: 0 0 0 4px rgba(213, 43, 66, 0.16);
+}
+
+/* stop the browser's autofill from turning the pill white */
+.lp-form input:-webkit-autofill {
+  -webkit-text-fill-color: #f5f2f2;
+  box-shadow: 0 0 0 1000px #1f1b20 inset;
+  caret-color: #f5f2f2;
+}
+
+.lp-password {
+  position: relative;
+}
+
+.lp-password input {
+  padding-right: 76px;
+}
+
+.lp-toggle {
+  position: absolute;
+  top: 26px;
+  right: 20px;
+  transform: translateY(-50%);
+  padding: 4px;
+  border: 0;
+  background: transparent;
+  color: #ff6b80;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.lp-error {
+  margin: 0 0 18px;
+  padding: 12px 18px;
+  border: 1px solid rgba(213, 43, 66, 0.55);
+  border-radius: 14px;
+  background: rgba(213, 43, 66, 0.12);
+  color: #ff9aa9;
+  font-size: 13px;
+}
+
+.lp-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 6px;
+}
+
+.lp-submit {
+  height: 50px;
+  padding: 0 34px;
+  border: 0;
+  border-radius: 999px;
+  background: #d52b42;
+  color: #fff;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.lp-submit:hover:not(:disabled) {
+  background: #e23a52;
+  transform: translateY(-1px);
+}
+
+.lp-submit:focus-visible,
+.lp-lost:focus-visible,
+.lp-toggle:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 3px;
+}
+
+.lp-submit:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.lp-lost {
+  padding: 4px 0;
+  border: 0;
+  border-bottom: 1px solid rgba(245, 242, 242, 0.45);
+  background: transparent;
+  color: #f5f2f2;
+  font: inherit;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.lp-lost:hover {
+  border-color: #d52b42;
+  color: #ff9aa9;
+}
+
+.lp-hint {
+  margin: 18px 0 0;
+  padding: 12px 16px;
+  border-radius: 14px;
+  background: #1c191d;
+  color: #b7afb7;
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.lp-bottom {
+  padding: 20px 8%;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  color: #8f8790;
+  font-size: 12px;
+}
+
+@media (max-width: 850px) {
+  .lp-page {
+    grid-template-columns: 1fr;
+  }
+
+  /* On small screens the photo becomes a slim banner above the form */
+  .lp-visual {
+    min-height: 0;
+    height: 310px;
+  }
+
+  .lp-photo {
+    object-position: center 62%;
+  }
+
+  .lp-copy {
+    display: none;
+  }
+
+  .lp-visual-footer {
+    padding: 14px 22px;
+  }
+
+  .lp-form-side {
+    min-height: 0;
+  }
+
+  .lp-top {
+    padding: 22px 24px 0;
+  }
+
+  .lp-form-wrap {
+    padding: 28px 24px 36px;
+    box-sizing: border-box;
+    max-width: none;
+  }
+
+  .lp-bottom {
+    padding: 18px 24px;
+  }
+
+  .lp-actions {
+    flex-wrap: wrap;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lp-submit,
+  .lp-form input {
+    transition: none;
+  }
+}
+
+/* Shared with ChangePasswordPage (kept unchanged) */
+.login-brand-icon {
+  width: 43px;
+  height: 43px;
+  display: grid;
+  place-items: center;
+  border-radius: 12px;
+  background: #dc2626;
+  color: white;
+  font-size: 23px;
+  font-weight: 800;
+}
+
+.login-kicker {
+  color: #dc2626;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 2.5px;
+}
+
+.login-description {
+  margin: 0 0 35px;
+  color: #778196;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.login-label {
+  display: block;
+  margin-bottom: 22px;
+  color: #374151;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.login-label input {
+  width: 100%;
+  height: 49px;
+  margin-top: 9px;
+  padding: 0 14px;
+  border: 1px solid #e0e4eb;
+  border-radius: 8px;
+  outline: none;
+  background: #fff;
+  color: #172033;
+  font-size: 13px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.login-label input:focus {
+  border-color: #dc2626;
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.09);
+}
+
+.login-label input::placeholder {
+  color: #a4acba;
+}
+
+.password-input-wrapper {
+  position: relative;
+}
+
+.password-input-wrapper input {
+  padding-right: 65px;
+}
+
+.password-toggle {
+  position: absolute;
+  top: 50%;
+  right: 13px;
+  transform: translateY(-35%);
+  border: 0;
+  background: transparent;
+  color: #dc2626;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.login-submit {
+  width: 100%;
+  height: 49px;
+  margin-top: 7px;
+  border: 0;
+  border-radius: 8px;
+  background: #dc2626;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 750;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.login-submit:hover {
+  background: #b91c1c;
+  transform: translateY(-1px);
+}
+
+.login-submit:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.login-error {
+  margin: 0 0 14px;
+  padding: 11px 13px;
+  border: 1px solid #fecaca;
+  border-radius: 7px;
+  background: #fef2f2;
+  color: #b91c1c;
+  font-size: 12px;
+}

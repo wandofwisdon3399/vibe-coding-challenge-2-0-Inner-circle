@@ -1,0 +1,181 @@
+/* COACH WORKSPACE (extends the shared admin shell and CoachesPage styles) */
+
+.cw-muted {
+  color: #918a91;
+}
+
+.cw-loading {
+  padding: 60px 16px;
+  text-align: center;
+}
+
+.cw-sports {
+  margin: 0 0 20px;
+  color: #b9b2b9;
+  font-size: 14px;
+}
+
+.cw-sports em {
+  display: inline-block;
+  margin: 0 6px 0 4px;
+  padding: 3px 10px;
+  border: 1px solid rgba(213, 43, 66, 0.5);
+  border-radius: 999px;
+  background: rgba(213, 43, 66, 0.12);
+  color: #f5f2f2;
+  font-size: 12px;
+  font-style: normal;
+}
+
+.coaches-page .cw-stats-4 {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.cw-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  align-items: start;
+}
+
+.cw-detail > .secondary-button {
+  margin-bottom: 16px;
+}
+
+.cw-hero {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.cw-hero h1 {
+  margin: 0 0 4px;
+  font-size: 24px;
+}
+
+.cw-hero p {
+  margin: 0;
+}
+
+.coaches-page .panel h2 {
+  margin: 0 0 14px;
+  font-size: 17px;
+}
+
+.coaches-page .section-heading h2 {
+  margin: 0;
+}
+
+.cw-list {
+  margin: 0 0 18px;
+  display: grid;
+  gap: 12px;
+}
+
+.cw-list div {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.cw-list dt {
+  color: #918a91;
+}
+
+.cw-list dd {
+  margin: 0;
+  text-align: right;
+  font-weight: 600;
+  word-break: break-word;
+}
+
+.cw-position {
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.075);
+}
+
+.cw-position label {
+  flex: 1;
+  display: grid;
+  gap: 6px;
+  color: #b9b2b9;
+  font-size: 13px;
+}
+
+.cw-position input {
+  padding: 10px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  background: #0f0d10;
+  color: #f5f2f2;
+}
+
+.cw-success {
+  margin: 10px 0 0;
+  color: #54c58a;
+  font-size: 13px;
+}
+
+.cw-big {
+  margin: 0;
+  font-size: 34px;
+  font-weight: 800;
+}
+
+.cw-counts {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 16px;
+  text-align: center;
+}
+
+.cw-counts strong {
+  display: block;
+  font-size: 20px;
+}
+
+.cw-counts span {
+  color: #918a91;
+  font-size: 12px;
+}
+
+.cw-items {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 10px;
+}
+
+.cw-items li {
+  display: grid;
+  gap: 3px;
+  padding: 12px 14px;
+  border-radius: 9px;
+  background: #1c191d;
+}
+
+.cw-items small {
+  color: #918a91;
+  font-size: 13px;
+}
+
+.cw-items p {
+  margin: 4px 0 0;
+  color: #b9b2b9;
+  font-size: 13px;
+}
+
+@media (max-width: 900px) {
+  .cw-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .coaches-page .cw-stats-4 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}

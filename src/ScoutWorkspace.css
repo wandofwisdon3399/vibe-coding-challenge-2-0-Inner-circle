@@ -1,0 +1,288 @@
+.sw-page {
+  min-height: 100vh;
+  background: #0c0b0d;
+  color: #f5f2f2;
+  font-family: inherit;
+}
+
+.sw-page button,
+.sw-page input,
+.sw-page select {
+  font: inherit;
+}
+
+.sw-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px 5%;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.075);
+  background: #151316;
+}
+
+.sw-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.sw-brand strong {
+  display: block;
+  letter-spacing: 0.08em;
+}
+
+.sw-brand span {
+  display: block;
+  color: #918a91;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+}
+
+.sw-brand-icon {
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  border-radius: 11px;
+  background: linear-gradient(145deg, #d52b42, #8e172b);
+  font-size: 21px;
+  font-weight: 800;
+}
+
+.sw-user {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  color: #918a91;
+  font-size: 14px;
+}
+
+.sw-button {
+  padding: 8px 16px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 8px;
+  background: #1c191d;
+  color: #f5f2f2;
+  cursor: pointer;
+}
+
+.sw-button:hover {
+  background: #242025;
+}
+
+.sw-main {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 32px 5% 48px;
+}
+
+.sw-intro h1 {
+  margin: 0 0 6px;
+  font-size: 28px;
+}
+
+.sw-intro p {
+  margin: 0 0 24px;
+  color: #918a91;
+}
+
+.sw-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 22px;
+}
+
+.sw-controls input,
+.sw-controls select {
+  padding: 11px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 9px;
+  background: #151316;
+  color: #f5f2f2;
+}
+
+.sw-controls input {
+  flex: 1 1 260px;
+}
+
+.sw-count {
+  color: #918a91;
+  font-size: 13px;
+}
+
+.sw-message {
+  padding: 48px 16px;
+  text-align: center;
+  color: #918a91;
+}
+
+.sw-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 14px;
+}
+
+.sw-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.075);
+  border-radius: 12px;
+  background: linear-gradient(145deg, #191619, #141215);
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.sw-card:hover {
+  border-color: rgba(213, 43, 66, 0.5);
+}
+
+.sw-card-info h3 {
+  margin: 0 0 3px;
+  font-size: 16px;
+}
+
+.sw-card-info span {
+  color: #d52b42;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.sw-card-info p {
+  margin: 4px 0 0;
+  color: #918a91;
+  font-size: 13px;
+}
+
+.sw-avatar {
+  width: 52px;
+  height: 52px;
+  flex: none;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  object-fit: cover;
+  background: #2a2429;
+  font-weight: 800;
+}
+
+.sw-avatar.large {
+  width: 72px;
+  height: 72px;
+  font-size: 22px;
+}
+
+.sw-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.65);
+}
+
+.sw-modal {
+  position: relative;
+  width: 100%;
+  max-width: 520px;
+  max-height: 88vh;
+  overflow-y: auto;
+  padding: 28px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 14px;
+  background: #151316;
+}
+
+.sw-close {
+  position: absolute;
+  top: 12px;
+  right: 14px;
+  border: 0;
+  background: transparent;
+  color: #918a91;
+  font-size: 26px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.sw-modal-head {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.sw-modal-head h2 {
+  margin: 0 0 4px;
+}
+
+.sw-modal-head span {
+  color: #d52b42;
+  font-weight: 700;
+  font-size: 13px;
+}
+
+.sw-details {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin: 0 0 22px;
+}
+
+.sw-details dt {
+  color: #918a91;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.sw-details dd {
+  margin: 4px 0 0;
+  font-weight: 600;
+}
+
+.sw-subtitle {
+  margin: 0 0 10px;
+  font-size: 15px;
+}
+
+.sw-achievements {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 10px;
+}
+
+.sw-achievements li {
+  padding: 12px 14px;
+  border-radius: 9px;
+  background: #1c191d;
+}
+
+.sw-achievements small {
+  margin-left: 8px;
+  color: #918a91;
+}
+
+.sw-achievements p {
+  margin: 6px 0 0;
+  color: #b9b2b9;
+  font-size: 13px;
+}
+
+.sw-muted {
+  color: #918a91;
+}
+
+@media (max-width: 560px) {
+  .sw-details {
+    grid-template-columns: 1fr;
+  }
+}
